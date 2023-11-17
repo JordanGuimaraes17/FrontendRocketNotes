@@ -8,3 +8,8 @@ npm install styled-components styled-components e como adicionar no projeto
 no main.js colocar import {ThemeProvider} from 'styled-components'
 npm install react-icons --save biblioteca  de icones
 npm install react-router-dom    biblioteca de rotas da paginas
+
+
+ npm install axios  axios é uma biblioteca para trabalhar com requisições http.
+
+import { useState } from "react" é um hook que pode criar estado
