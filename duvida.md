@@ -23,5 +23,6 @@ importação do createContext ,é o famoso contact API do react. é essa funçã
  Os Hooks são funções no permitem que você use os estados, manipule os acesse estados,Hook encapsula
  a lógica dessas funcionalidades, em diversos lugares da sua aplicação,
 
- utilizar o "useEffect" e ele vai buscar dados no localstorage
+ utilizar o "useEffect" e ele vai buscar dados no localstorage 
+ useEffect componente precisa fazer algo depois ,A gente pode definir algo que o componente execute após a renderização.   sempre coloca o useEffect dentro do
  
