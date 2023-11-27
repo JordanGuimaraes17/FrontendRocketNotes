@@ -1,6 +1,5 @@
 import { Container } from './style'
-
-import { Tag } from '../Tag'
+import { Tag } from './../Tag'
 
 export function Note({ data, ...rest }) {
   return (
@@ -10,7 +9,7 @@ export function Note({ data, ...rest }) {
       {data.tags && (
         <footer>
           {data.tags.map(tag => (
-            <Tag key={String(tag.id)} title={tag.name} />
+            <Tag key={tag.id} title={tag.name} />
           ))}
         </footer>
       )}
