@@ -5,7 +5,7 @@ import { Input } from '../../components/Input'
 import { FiMail, FiLock, FiUser } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
-import { ButtonText } from '../../Components/ButtonText'
+import { ButtonText } from '../../components/ButtonText'
 
 export function SignUp() {
   const [name, setName] = useState('')
