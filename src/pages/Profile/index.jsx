@@ -32,13 +32,30 @@ export function Profile() {
     const userUpdated = Object.assign(user, updated)
     await updateProfile({ user: userUpdated, avatarFile })
   }
+
   function handleChangeAvatar(event) {
     const file = event.target.files[0]
-    setAvatarFile(file)
 
-    const imagePreview = URL.createObjectURL(file)
-    setAvatar(imagePreview)
+    // Verificar se um arquivo foi selecionado
+    if (file) {
+      // Verificar a extensão do arquivo
+      const allowedExtensions = ['jpg', 'jpeg', 'png']
+      const fileExtension = file.name.split('.').pop().toLowerCase()
+
+      if (allowedExtensions.includes(fileExtension)) {
+        // A extensão é permitida, você pode prosseguir com o processamento do arquivo
+        setAvatarFile(file)
+        const imagePreview = URL.createObjectURL(file)
+        setAvatar(imagePreview)
+      } else {
+        // A extensão não é permitida, informe ao usuário
+        alert('Por favor, selecione um arquivo PNG ou JPG.')
+        // Ou você pode limpar o campo de entrada para evitar processar o arquivo inválido
+        event.target.value = null
+      }
+    }
   }
+
   function handleBack() {
     navigate(-1)
   }
@@ -55,7 +72,12 @@ export function Profile() {
           <img src={avatar} alt="Foto do usuário" />
           <label htmlFor="avatar">
             <FiCamera />
-            <input id="avatar" type="file" onChange={handleChangeAvatar} />
+            <input
+              id="avatar"
+              type="file"
+              onChange={handleChangeAvatar}
+              accept=".jpg, .jpeg, .png"
+            />
           </label>
         </Avatar>
         <Input
