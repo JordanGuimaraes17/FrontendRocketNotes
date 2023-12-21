@@ -3,30 +3,51 @@ import { Button } from '../../components/Button'
 import { Container, Form, Background } from './style'
 import { Input } from '../../components/Input'
 import { FiMail, FiLock, FiUser } from 'react-icons/fi'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import { ButtonText } from '../../Components/ButtonText'
 
 export function SignUp() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  function backNavigate() {
+    navigate(-1)
+  }
 
   function handleSignUp() {
     if (!name || !email || !password) {
-      return alert('Preencha todos os campos! ')
+      return alert('prencha todos campos!')
     }
+    // Verificar se o nome possui um formato específico (apenas letras e espaços)
+    const nameRegex = /^[a-zA-Z\s]+$/
+    if (!nameRegex.test(name)) {
+      return alert('O nome deve conter apenas letras e espaços!')
+    }
+    // Verificar se o e-mail possui um formato válido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return alert('Digite um e-mail válido!')
+    }
+
+    // Verificar se a senha atende ao comprimento mínimo (exemplo: 6 caracteres)
+    const minLength = 6
+    if (password.length < minLength) {
+      return alert(`A senha deve ter pelo menos ${minLength} caracteres!`)
+    }
+
     api
       .post('/users', { name, email, password })
       .then(() => {
         alert('Usuário cadastrado com sucesso!')
-        navigate('/')
+        navigate(-1)
       })
       .catch(error => {
         if (error.response) {
           alert(error.response.data.message)
         } else {
-          alert('Não foi possível cadastrar')
+          alert('não foi possivel cadastar')
         }
       })
   }
@@ -59,7 +80,7 @@ export function SignUp() {
           onChange={e => setPassword(e.target.value)}
         />
         <Button title="Cadastrar" onClick={handleSignUp} />
-        <Link to="/">Voltar para o login</Link>
+        <ButtonText title="Voltar para o login" onClick={backNavigate} />
       </Form>
     </Container>
   )
