@@ -31,6 +31,11 @@ export function Profile() {
     }
     const userUpdated = Object.assign(user, updated)
     await updateProfile({ user: userUpdated, avatarFile })
+    // Verificar se a senha atende ao comprimento mínimo (exemplo: 6 caracteres)
+    const minLength = 6
+    if (passwordNew.length < minLength) {
+      return alert(`A senha deve ter pelo menos ${minLength} caracteres!`)
+    }
   }
 
   function handleChangeAvatar(event) {
